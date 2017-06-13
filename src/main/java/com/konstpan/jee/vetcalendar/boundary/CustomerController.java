@@ -4,6 +4,8 @@ import com.konstpan.jee.vetcalendar.entity.Customer;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,6 +28,10 @@ public class CustomerController implements Serializable {
     public String create() {
         customerService.create(customer);
         customer = null;
+
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "A new customer was created.", null);
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        
         return "index";
     }
 
@@ -39,7 +45,7 @@ public class CustomerController implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
+
     public List<Customer> getCustomerList() {
         return customerService.findAll();
     }

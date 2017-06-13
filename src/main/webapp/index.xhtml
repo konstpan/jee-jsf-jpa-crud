@@ -7,8 +7,10 @@
         <title>VET Calendar</title>
     </h:head>
     <h:body>
+        
+        <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
 
-        <h:dataTable var="customer" value="#{customerController.customerList}">
+        <h:dataTable var="customer" value="#{customerController.customerList}" rendered="#{not empty customerController.customerList}">
             <h:column>
                 <f:facet name="header">Name</f:facet>
                 <h:outputText value="#{customer.firstname} #{customer.lastname}" />
@@ -18,8 +20,9 @@
                 <h:outputText value="#{customer.email}" />
             </h:column>
         </h:dataTable>
-
-        <h:form>
+        
+        <p>Use the form below to add new customer.</p>
+        <h:form id="customerForm">
             <h:panelGrid columns="2">
                 <h:outputLabel value="Firstname" for="firstname" />
                 <h:inputText id="firstname" value="#{customerController.customer.firstname}" />

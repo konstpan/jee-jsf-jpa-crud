@@ -3,6 +3,8 @@ package com.konstpan.jee.vetcalendar.boundary;
 import com.konstpan.jee.vetcalendar.entity.Customer;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -19,19 +21,23 @@ public class CustomerController implements Serializable {
 
     private Customer customer;
 
+    private ResourceBundle bundle;
+
     @Inject
     CustomerService customerService;
 
-    public CustomerController() {
+    @PostConstruct
+    public void init() {
+        bundle = ResourceBundle.getBundle("messages");
     }
 
     public String create() {
         customerService.create(customer);
         customer = null;
 
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "A new customer was created.", null);
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdCustomerMessage"), null);
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        
+
         return "index";
     }
 

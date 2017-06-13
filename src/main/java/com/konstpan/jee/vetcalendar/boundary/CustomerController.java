@@ -3,7 +3,7 @@ package com.konstpan.jee.vetcalendar.boundary;
 import com.konstpan.jee.vetcalendar.entity.Customer;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -12,7 +12,7 @@ import javax.inject.Named;
  * @author Panos
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class CustomerController implements Serializable {
 
     private Customer customer;

@@ -6,27 +6,25 @@
         <title>VET Calendar</title>
     </h:head>
     <h:body>
+        
+        <h:dataTable var="customer" value="#{customerController.customerList}">
+            <h:column>#{customer.firstname} #{customer.lastname}</h:column>
+            <h:column>#{customer.email}</h:column>
+        </h:dataTable>
 
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Firstname" for="firstname" />
-				<h:inputText id="firstname" value="#{customerController.customer.firstname}" />
-				<h:outputLabel value="Lastname" for="lastname" />
-				<h:inputText id="lastname" value="#{customerController.customer.lastname}" />
-				<h:outputLabel value="Email" for="email" />
-				<h:inputText id="email" value="#{customerController.customer.email}" />
-			</h:panelGrid>
-			<br />
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Pet name" for="petName" />
-				<h:inputText id="petName" value="#{customerController.customer.pets[0].name}" />
-				<h:outputLabel value="Pet breed" for="petBreed" />
-				<h:inputText id="petBreed" value="#{customerController.customer.pets[0].breed}" />
-			</h:panelGrid>
-			<br />
-			<h:commandButton action="#{customerController.create}" value="Create" />
-		</h:form>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Firstname" for="firstname" />
+                <h:inputText id="firstname" value="#{customerController.customer.firstname}" />
+                <h:outputLabel value="Lastname" for="lastname" />
+                <h:inputText id="lastname" value="#{customerController.customer.lastname}" />
+                <h:outputLabel value="Email" for="email" />
+                <h:inputText id="email" value="#{customerController.customer.email}" />
+            </h:panelGrid>
+            
+            <br />
+            <h:commandButton action="#{customerController.create}" value="Create" />
+        </h:form>
 
     </h:body>
 </html>
-

@@ -14,56 +14,56 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Customer {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	private String firstname;
-	private String lastname;
-	private String email;
 
-	@OneToMany
-	private List<Pet> pets = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    private String firstname;
+    private String lastname;
+    private String email;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @OneToMany
+    private List<Pet> pets = new ArrayList<>();
 
-	public String getFirstname() {
-		return firstname;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getLastname() {
-		return lastname;
-	}
+    public String getFirstname() {
+        return firstname;
+    }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getLastname() {
+        return lastname;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
-	public List<Pet> getPets() {
-		return pets;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setPets(List<Pet> pets) {
-		this.pets = pets;
-	}
-	
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
+
 }

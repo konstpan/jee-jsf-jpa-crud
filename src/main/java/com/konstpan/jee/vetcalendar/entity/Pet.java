@@ -11,47 +11,47 @@ import javax.persistence.Id;
  */
 @Entity
 public class Pet {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
-	
-	private String name;
-	
-	private Date dateOfBirth;
-	
-	private String breed;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private Date dateOfBirth;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String breed;
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getBreed() {
-		return breed;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setBreed(String breed) {
-		this.breed = breed;
-	}
-	
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
 }

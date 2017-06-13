@@ -1,6 +1,7 @@
 package com.konstpan.jee.vetcalendar.boundary;
 
 import com.konstpan.jee.vetcalendar.entity.Customer;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,12 +12,15 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CustomerService {
-	
-	@PersistenceContext(unitName = "myPU")
-	EntityManager em;
-	
-	public void create(Customer customer) {
-		em.persist(customer);
-	}
-	
+
+    @PersistenceContext(unitName = "myPU")
+    EntityManager em;
+
+    public void create(Customer customer) {
+        em.persist(customer);
+    }
+
+    public List<Customer> findAll() {
+        return em.createQuery("SELECT o FROM Customer o", Customer.class).getResultList();
+    }
 }

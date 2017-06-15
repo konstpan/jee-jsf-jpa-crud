@@ -11,6 +11,7 @@
         <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
 
         <h:dataTable var="customer" value="#{customerController.customerList}" rendered="#{not empty customerController.customerList}">
+            <f:facet name="header">Current Customers</f:facet>
             <h:column>
                 <f:facet name="header">Name</f:facet>
                 <h:outputText value="#{customer.firstname} #{customer.lastname}" />
@@ -25,11 +26,17 @@
         <h:form id="customerForm">
             <h:panelGrid columns="2">
                 <h:outputLabel value="Firstname" for="firstname" />
-                <h:inputText id="firstname" value="#{customerController.customer.firstname}" />
+                <h:inputText id="firstname" value="#{customerController.customer.firstname}">
+                	<f:validateLength minimum="3" maximum="50"/>
+                </h:inputText>
+                
                 <h:outputLabel value="Lastname" for="lastname" />
-                <h:inputText id="lastname" value="#{customerController.customer.lastname}" />
+                <h:inputText id="lastname" value="#{customerController.customer.lastname}">
+                	<f:validateLength minimum="3" maximum="50"/>
+                </h:inputText>
+                
                 <h:outputLabel value="Email" for="email" />
-                <h:inputText id="email" value="#{customerController.customer.email}" />
+                <h:inputText id="email" value="#{customerController.customer.email}" required="true" />
             </h:panelGrid>
 
             <br />

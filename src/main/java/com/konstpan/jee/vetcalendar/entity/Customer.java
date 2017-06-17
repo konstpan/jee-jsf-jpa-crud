@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -19,8 +20,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Size(min = 3, max = 50)
     private String firstname;
+
+    @Size(min = 3, max = 50)
     private String lastname;
+
+    @Size(min = 1)
     private String email;
 
     @OneToMany

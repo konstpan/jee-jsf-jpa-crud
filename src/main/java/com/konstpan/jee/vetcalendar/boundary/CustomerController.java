@@ -4,6 +4,9 @@ import com.konstpan.jee.vetcalendar.entity.Customer;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +21,8 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class CustomerController implements Serializable {
+
+    private static final Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
 
     private Customer customer;
 
@@ -35,7 +40,8 @@ public class CustomerController implements Serializable {
         customerService.create(customer);
         customer = null;
 
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdCustomerMessage"), null);
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdCustomerMessage"),
+                null);
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 
         return "index";

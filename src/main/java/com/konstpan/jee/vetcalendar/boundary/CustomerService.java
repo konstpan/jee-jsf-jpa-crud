@@ -1,6 +1,8 @@
 package com.konstpan.jee.vetcalendar.boundary;
 
 import com.konstpan.jee.vetcalendar.entity.Customer;
+import com.konstpan.jee.vetcalendar.entity.Pet;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,8 +21,20 @@ public class CustomerService {
     public void create(Customer customer) {
         em.persist(customer);
     }
-
+    
+    public void addPet(Long customerId, Pet pet) {
+        em.persist(pet);
+    }
+    
     public List<Customer> findAll() {
         return em.createQuery("SELECT o FROM Customer o", Customer.class).getResultList();
+    }
+
+    public void update(Customer customer) {
+        em.merge(customer);
+    }
+
+    public Customer findCustomerById(Long id) {
+        return em.find(Customer.class, id);
     }
 }

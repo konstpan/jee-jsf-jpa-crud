@@ -9,18 +9,23 @@
 
     <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
 
-    <h:dataTable var="customer" value="#{customerController.customerList}"
-        rendered="#{not empty customerController.customerList}">
-        <f:facet name="header">Current Customers</f:facet>
-        <h:column>
-            <f:facet name="header">Name</f:facet>
-            <h:outputText value="#{customer.firstname} #{customer.lastname}" />
-        </h:column>
-        <h:column>
-            <f:facet name="header">Email</f:facet>
-            <h:outputText value="#{customer.email}" />
-        </h:column>
-    </h:dataTable>
+    <h:form id="customerListForm">
+        <h:dataTable var="customer" value="#{customerController.customerList}"
+            rendered="#{not empty customerController.customerList}">
+            <f:facet name="header">Current Customers</f:facet>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{customer.firstname} #{customer.lastname}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                <h:outputText value="#{customer.email}" />
+            </h:column>
+            <h:column>
+                <h:commandLink action="#{customerController.edit(customer.id)}" value="Edit" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
 
     <p>Use the form below to add new customer.</p>
     <h:form id="customerForm">

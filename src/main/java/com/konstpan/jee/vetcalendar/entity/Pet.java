@@ -4,6 +4,7 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Pet {
     @GeneratedValue
     private Long id;
 
+    @Size(min = 3, max = 50)
     private String name;
 
     private Date dateOfBirth;

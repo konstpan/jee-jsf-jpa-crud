@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>VET Calendar</title>
+</h:head>
+<body>
+
+    <h:form id="customerForm">
+        <h:inputHidden id="customerId" value="#{customerController.customer.id}" />
+        <h:panelGrid columns="3">
+            <h:outputLabel value="Firstname" for="firstname" />
+            <h:inputText id="firstname" value="#{customerController.customer.firstname}" />
+            <h:message for="firstname" style="color: red;" />
+
+            <h:outputLabel value="Lastname" for="lastname" />
+            <h:inputText id="lastname" value="#{customerController.customer.lastname}" />
+            <h:message for="lastname" style="color: red;" />
+
+            <h:outputLabel value="Email" for="email" />
+            <h:inputText id="email" value="#{customerController.customer.email}" />
+            <h:message for="email" style="color: red;" />
+        </h:panelGrid>
+
+        <br />
+        <h:commandButton action="#{customerController.update}" value="Update" />
+    </h:form>
+    <br/>
+    
+    <h:form id="customerPetListForm">
+        <h:dataTable var="pet" value="#{customerController.customer.pets}"
+            rendered="#{not empty customerController.customer.pets}">
+            <f:facet name="header">Pets</f:facet>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{pet.name}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    
+    <p>Use the form below to add a new pet belonging to the customer.</p>
+    <h:form id="petForm">
+        <h:inputHidden id="customerId" value="#{customerController.customer.id}" />
+        <h:panelGrid columns="3">
+            <h:outputLabel value="name" for="name" />
+            <h:inputText id="name" value="#{customerController.pet.name}" />
+            <h:message for="name" style="color: red;" />
+        </h:panelGrid>
+
+        <br />
+        <h:commandButton action="#{customerController.addPet}" value="Create" />
+    </h:form>
+
+</body>
+</html>

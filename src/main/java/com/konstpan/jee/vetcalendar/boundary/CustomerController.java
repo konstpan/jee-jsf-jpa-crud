@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ import javax.inject.Named;
  * @author Panos
  */
 @Named
-@RequestScoped
+@SessionScoped
 public class CustomerController implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
@@ -51,9 +51,11 @@ public class CustomerController implements Serializable {
     }
 
     public String addPet() {
-        Customer cust = customerService.findCustomerById(customer.getId());
-        cust.getPets().add(pet);
-        customerService.update(cust);
+        customer = customerService.findCustomerById(customer.getId());
+        customer.getPets().add(pet);
+        customerService.update(customer);
+        
+        customer = null;
         pet = null;
 
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdPetMessage"),
@@ -63,7 +65,7 @@ public class CustomerController implements Serializable {
         return "index";
     }
 
-    public String edit(Long id) {
+    public String prepareEdit(Long id) {
         customer = customerService.findCustomerById(id);
 
         return "editCustomer";

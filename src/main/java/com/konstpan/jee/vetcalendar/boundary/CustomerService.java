@@ -22,10 +22,6 @@ public class CustomerService {
         em.persist(customer);
     }
     
-    public void addPet(Long customerId, Pet pet) {
-        em.persist(pet);
-    }
-    
     public List<Customer> findAll() {
         return em.createQuery("SELECT o FROM Customer o", Customer.class).getResultList();
     }

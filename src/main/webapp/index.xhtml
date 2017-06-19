@@ -22,7 +22,7 @@
                 <h:outputText value="#{customer.email}" />
             </h:column>
             <h:column>
-                <h:commandLink action="#{customerController.edit(customer.id)}" value="Edit" />
+                <h:commandLink action="#{customerController.prepareEdit(customer.id)}" value="Edit" />
             </h:column>
         </h:dataTable>
     </h:form>

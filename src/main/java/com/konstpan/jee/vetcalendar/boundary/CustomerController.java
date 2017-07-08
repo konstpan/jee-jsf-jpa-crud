@@ -29,6 +29,8 @@ public class CustomerController implements Serializable {
 
 	private Pet pet;
 
+	private List<Pet> selectedPets;
+
 	private ResourceBundle bundle;
 
 	@Inject
@@ -116,4 +118,11 @@ public class CustomerController implements Serializable {
 		return customerService.findAll();
 	}
 
+	public List<Pet> getSelectedPets() {
+		return selectedPets;
+	}
+
+	public void setSelectedPets(List<Pet> selectedPets) {
+		this.selectedPets = selectedPets;
+	}
 }

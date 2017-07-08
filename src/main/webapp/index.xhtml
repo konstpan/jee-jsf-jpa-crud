@@ -12,23 +12,41 @@
 	<p:growl globalOnly="true" />
 
 	<h:form id="customerListForm">
-		<p:dataTable var="customer" value="#{customerController.customerList}"
+		<p:dataTable id="customerList" var="customer"
+			value="#{customerController.customerList}"
 			rendered="#{not empty customerController.customerList}">
 			<f:facet name="header">Current Customers</f:facet>
-			<p:column>
-				<f:facet name="header">Name</f:facet>
+			<p:column headerText="Name">
 				<h:outputText value="#{customer.firstname} #{customer.lastname}" />
 			</p:column>
-			<p:column>
-				<f:facet name="header">Email</f:facet>
+			<p:column headerText="Email">
 				<h:outputText value="#{customer.email}" />
 			</p:column>
-			<p:column>
+			<p:column headerText="Actions">
 				<h:commandLink
 					action="#{customerController.prepareEdit(customer.id)}"
 					value="Edit" />
+					&nbsp;
+				<p:commandLink id="previewPetsBtn"
+					update=":customerListForm:previewPets"
+					oncomplete="PF('previewPetsOverlay').show('#{component.clientId}')"
+					value="Preview Pets">
+					<f:setPropertyActionListener value="#{customer.pets}"
+						target="#{customerController.selectedPets}" />
+				</p:commandLink>
 			</p:column>
 		</p:dataTable>
+
+		<p:overlayPanel widgetVar="previewPetsOverlay" dynamic="true"
+			showCloseIcon="true">
+			<p:outputPanel id="previewPets">
+				<p:outputLabel rendered="#{empty customerController.selectedPets}" value="No records found." />
+				<p:orderList rendered="#{not empty customerController.selectedPets}"
+					value="#{customerController.selectedPets}" var="pet"
+					controlsLocation="none" itemLabel="#{pet.name}"
+					itemValue="#{pet.name}" />
+			</p:outputPanel>
+		</p:overlayPanel>
 	</h:form>
 
 	<p>Use the form below to add new customer.</p>

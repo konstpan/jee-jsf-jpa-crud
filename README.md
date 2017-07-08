@@ -1,2 +1,2 @@
 # Vet appointments calendar
-WIP
+Demonstrates the use of CDI, JPA, JSF and PrimeFaces

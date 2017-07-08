@@ -23,91 +23,97 @@ import javax.inject.Named;
 @SessionScoped
 public class CustomerController implements Serializable {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
 
-    private Customer customer;
+	private Customer customer;
 
-    private Pet pet;
+	private Pet pet;
 
-    private ResourceBundle bundle;
+	private ResourceBundle bundle;
 
-    @Inject
-    CustomerService customerService;
+	@Inject
+	CustomerService customerService;
 
-    @PostConstruct
-    public void init() {
-        bundle = ResourceBundle.getBundle("messages");
-    }
+	@PostConstruct
+	public void init() {
+		bundle = ResourceBundle.getBundle("messages");
+	}
 
-    public String create() {
-        customerService.create(customer);
-        customer = null;
+	public String create() {
+		customerService.create(customer);
+		customer = null;
 
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdCustomerMessage"),
-                null);
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdCustomerMessage"),
+				null);
+		FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 
-        return "index";
-    }
+		return "index";
+	}
 
-    public String addPet() {
-        customer = customerService.findCustomerById(customer.getId());
-        customer.getPets().add(pet);
-        customerService.update(customer);
-        
-        customer = null;
-        pet = null;
+	public String addPet() {
+		customer = customerService.findCustomerById(customer.getId());
+		customer.getPets().add(pet);
+		customerService.update(customer);
 
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdPetMessage"),
-                null);
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+		customer = null;
+		pet = null;
 
-        return "index";
-    }
+		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("createdPetMessage"),
+				null);
+		FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 
-    public String prepareEdit(Long id) {
-        customer = customerService.findCustomerById(id);
+		return "index";
+	}
 
-        return "editCustomer";
-    }
+	public String prepareEdit(Long id) {
+		customer = customerService.findCustomerById(id);
 
-    public String update() {
-        LOGGER.info("Updating customer id " + customer.getId());
+		return "editCustomer";
+	}
 
-        customerService.update(customer);
-        customer = null;
+	public String cancelEdit() {
+		customer = null;
 
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("updatedCustomerMessage"),
-                null);
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+		return "index";
+	}
 
-        return "index";
-    }
+	public String update() {
+		LOGGER.info("Updating customer id " + customer.getId());
 
-    public Customer getCustomer() {
-        if (customer == null) {
-            customer = new Customer();
-        }
-        return customer;
-    }
+		customerService.update(customer);
+		customer = null;
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("updatedCustomerMessage"),
+				null);
+		FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 
-    public Pet getPet() {
-        if (pet == null) {
-            pet = new Pet();
-        }
-        return pet;
-    }
+		return "index";
+	}
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
+	public Customer getCustomer() {
+		if (customer == null) {
+			customer = new Customer();
+		}
+		return customer;
+	}
 
-    public List<Customer> getCustomerList() {
-        return customerService.findAll();
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Pet getPet() {
+		if (pet == null) {
+			pet = new Pet();
+		}
+		return pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
+	public List<Customer> getCustomerList() {
+		return customerService.findAll();
+	}
 
 }
